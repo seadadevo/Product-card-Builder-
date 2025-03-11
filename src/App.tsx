@@ -1,9 +1,9 @@
-import { ChangeEvent, FormEvent, useState } from "react";
+import { ChangeEvent, FormEvent, useCallback, useState } from "react";
 import reactLogo from "./assets/react.svg";
 import viteLogo from "/vite.svg";
 import "./App.css";
 import { v4 as uuid } from "uuid";
-import toast, { Toaster } from 'react-hot-toast';
+import toast, { Toaster } from "react-hot-toast";
 import ProductCard from "./components/ProductCard";
 import { categories, colors, formInputsList, productList } from "./data";
 import Model from "./components/UI/Model";
@@ -64,7 +64,10 @@ const App = () => {
   const close = () => {
     setIsOpen(false);
   };
-  const openEdit = () => {
+  // const openEdit = () => {
+
+  // };
+  const openEdit = useCallback(() => {
     setIsOpenEdit(true);
     setErrors({
       title: "",
@@ -74,15 +77,15 @@ const App = () => {
       colors: "",
     });
     setTempColors(productEdit.colors);
-  };
+  }, []);
   const closeEdit = () => {
     setIsOpenEdit(false);
   };
 
-  const openConfirmModel = () => {
+  const openConfirmModel = useCallback(() => {
     setIsOpenConfirmModel(true);
-  };
-
+  }, []);
+ 
   const closeConfirmModel = () => {
     setIsOpenConfirmModel(false);
   };
@@ -185,21 +188,22 @@ const App = () => {
     closeEdit();
   };
 
-  // todo remove handler 
+  // todo remove handler
   const removeProductHandler = () => {
     console.log(productEdit.id);
-    const filtered = products.filter(product => product.id !== productEdit.id)
+    const filtered = products.filter(
+      (product) => product.id !== productEdit.id
+    );
     setProducts(filtered);
-    closeConfirmModel()
-    toast('product has been deleted!', {
+    closeConfirmModel();
+    toast("product has been deleted!", {
       icon: "✔",
       style: {
         backgroundColor: "black",
-        color: "white"
-      }
+        color: "white",
+      },
     });
-  }
-
+  };
 
   // ! Render
   // todo render products
@@ -372,31 +376,30 @@ const App = () => {
         </form>
       </Model>
       {/* Start Remove Product Model */}
-      <Model 
-       isOpen={isOpenConfirmModel}
-       onClose= {closeConfirmModel}
-       title="Remove this Product "
+      <Model
+        isOpen={isOpenConfirmModel}
+        onClose={closeConfirmModel}
+        title="Remove this Product "
       >
-
         <p className="font-semibold text-[16px] text-[#aaacae] my-[10px]">
-        this product wilt remove it permanently from your inventory. Any associated data,
-sales history, and other related information will also be deleted. Please make sure this is the intended
-action .
+          this product wilt remove it permanently from your inventory. Any
+          associated data, sales history, and other related information will
+          also be deleted. Please make sure this is the intended action .
         </p>
-       <div className="flex flex-items space-x-3">
-       <Button
-              className={"bg-indigo-700 hover:bg-indigo-500 duration-200"}
-              onClick={removeProductHandler}
-         >
-              Yes, Remove
-            </Button>
-            <Button
-              className={"bg-gray-500 hover:bg-gray-300 duration-200"}
-              onClick={closeConfirmModel}
-            >
-              Cancel
-            </Button>
-       </div>
+        <div className="flex flex-items space-x-3">
+          <Button
+            className={"bg-indigo-700 hover:bg-indigo-500 duration-200"}
+            onClick={removeProductHandler}
+          >
+            Yes, Remove
+          </Button>
+          <Button
+            className={"bg-gray-500 hover:bg-gray-300 duration-200"}
+            onClick={closeConfirmModel}
+          >
+            Cancel
+          </Button>
+        </div>
       </Model>
 
       <Toaster />

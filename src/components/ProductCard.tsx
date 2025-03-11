@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { memo, useState } from "react";
 import { colors } from "../data";
 import { IProduct } from "../interfaces";
 import { txtSlicer } from "../utils/functions";
@@ -82,4 +82,5 @@ const ProductCard = ({ product, setproductEdit, openEdit ,idx, setproductEditInd
   );
 };
 
-export default ProductCard;
+
+export default memo(ProductCard);

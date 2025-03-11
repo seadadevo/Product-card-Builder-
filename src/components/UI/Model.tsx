@@ -1,5 +1,5 @@
 import { Button, Dialog, DialogPanel, DialogTitle } from "@headlessui/react";
-import { ReactNode, useState } from "react";
+import { memo, ReactNode, useState } from "react";
 
 interface ModelProps {
     isOpen: boolean;
@@ -45,4 +45,4 @@ const Model = ({ isOpen, onClose, title, children}: ModelProps) => {
   );
 };
 
-export default Model;
+export default memo(Model);
