@@ -1,4 +1,4 @@
-import { ChangeEvent, FormEvent, useCallback, useState } from "react";
+import { ChangeEvent, FormEvent, useCallback, useRef, useState } from "react";
 import reactLogo from "./assets/react.svg";
 import viteLogo from "/vite.svg";
 import "./App.css";
@@ -31,6 +31,7 @@ const App = () => {
     },
   };
 
+  const inputRef = useRef<null | HTMLInputElement>(null)
   // ! State
   const [products, setProducts] = useState<IProduct[]>(productList);
   const [product, setProduct] = useState<IProduct>(defaultProductObj);
@@ -64,9 +65,7 @@ const App = () => {
   const close = () => {
     setIsOpen(false);
   };
-  // const openEdit = () => {
 
-  // };
   const openEdit = useCallback(() => {
     setIsOpenEdit(true);
     setErrors({
@@ -91,17 +90,18 @@ const App = () => {
   };
 
   // todo on Change Handler > name on IFormInput
-  const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
-    const { value, name } = e.target;
-    setProduct({
-      ...product,
-      [name]: value,
-    });
-    setErrors({
-      ...errors,
-      [name]: "",
-    });
-  };
+
+  const onChangeHandler = useCallback((e: ChangeEvent<HTMLInputElement>) => {
+      const { value, name } = e.target;
+      setProduct((prev) => ({
+        ...prev,
+        [name]: value,
+      }));
+      setErrors((prev) => ({
+        ...prev,
+        [name]: "",
+      }));
+    }, []);
   const onChangeHandlerToEdit = (e: ChangeEvent<HTMLInputElement>) => {
     const { value, name } = e.target;
     setproductEdit({
@@ -231,6 +231,7 @@ const App = () => {
           {input.label}
         </label>
         <Input
+          ref={inputRef}
           type={input.type}
           id={input.id}
           name={input.name}
