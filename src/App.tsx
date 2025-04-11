@@ -12,6 +12,7 @@ import { productValidation } from "./validation";
 import ErrorMessage from "./components/ErrorMessage";
 import CircleColor from "./components/CircleColor";
 import Select from "./components/UI/Select";
+import { IProduct } from "./interfaces";
 
 const App = () => {
   const defaultProductObj = {
