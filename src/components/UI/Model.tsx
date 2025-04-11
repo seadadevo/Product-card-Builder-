@@ -1,5 +1,5 @@
-import { Button, Dialog, DialogPanel, DialogTitle } from "@headlessui/react";
-import { memo, ReactNode, useState } from "react";
+import { Dialog, DialogPanel, DialogTitle } from "@headlessui/react";
+import { memo, ReactNode } from "react";
 
 interface ModelProps {
     isOpen: boolean;

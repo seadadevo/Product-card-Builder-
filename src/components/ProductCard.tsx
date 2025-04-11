@@ -1,5 +1,4 @@
-import { memo, useState } from "react";
-import { colors } from "../data";
+import { memo } from "react";
 import { IProduct } from "../interfaces";
 import { txtSlicer } from "../utils/functions";
 import CircleColor from "./CircleColor";

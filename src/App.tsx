@@ -1,6 +1,4 @@
 import { ChangeEvent, FormEvent, useCallback, useRef, useState } from "react";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
 import "./App.css";
 import { v4 as uuid } from "uuid";
 import toast, { Toaster } from "react-hot-toast";
@@ -9,10 +7,7 @@ import { categories, colors, formInputsList, productList } from "./data";
 import Model from "./components/UI/Model";
 import Button from "./components/UI/Button";
 import Input from "./components/UI/Input";
-import { Description } from "@headlessui/react";
 import { ProductNameTypes } from "./types";
-import { IProduct } from "./interfaces";
-import Image from "./components/Image";
 import { productValidation } from "./validation";
 import ErrorMessage from "./components/ErrorMessage";
 import CircleColor from "./components/CircleColor";
